@@ -1,4 +1,4 @@
-import { Children, createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { AlgorithmType, GridType, MazeType } from "../utils/type";
 
 interface PathFindingContextInterface {
