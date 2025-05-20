@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { Grid } from "./components/grid"
 import { PathFindingProvider } from "./context/pathFindingContext"
 import { SpeedProvider } from "./context/speedContext"
@@ -5,13 +6,13 @@ import { TileProvider } from "./context/tileContext"
 
 
 function App() {
-
+  const isVisualizationRunningRef = useRef(false)
   return(
     <PathFindingProvider>
       <TileProvider>
         <SpeedProvider>
           <div className="h-screen w-screen flex flex-col">
-            <Grid /> 
+            <Grid isVisualizationRunningRef={isVisualizationRunningRef}/> 
           </div>
         </SpeedProvider>
       </TileProvider>
