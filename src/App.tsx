@@ -3,6 +3,7 @@ import { Grid } from "./components/grid"
 import { PathFindingProvider } from "./context/pathFindingContext"
 import { SpeedProvider } from "./context/speedContext"
 import { TileProvider } from "./context/tileContext"
+import { Nav } from "./components/nav"
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <TileProvider>
         <SpeedProvider>
           <div className="h-screen w-screen flex flex-col">
+            <Nav />
             <Grid isVisualizationRunningRef={isVisualizationRunningRef}/> 
           </div>
         </SpeedProvider>
