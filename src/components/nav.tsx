@@ -44,6 +44,10 @@ export function Nav(){
                         onChange={(e)=>{
                             handleGenerateMaze(e.target.value as MazeType)
                         }}/>
+                        <Select
+                            label='Graph'
+                            value={}
+                        />
                 </div>
             </div>
         </div>
