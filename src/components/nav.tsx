@@ -3,7 +3,7 @@ import { usePathFinding } from "../hooks/usePathFinding";
 import { useTile } from "../hooks/useTile";
 import { EXTENDED_SLEEP_TIME, MAZES, PATHFINDING_ALGORITHMS, SLEEP_TIME, SPEEDS } from "../utils/constant";
 import { resetGrid } from "../utils/resetGrid";
-import { AlgorithmType, MazeType } from "../utils/type";
+import { AlgorithmType, MazeType, SpeedType } from "../utils/type";
 import { Select } from "./select";
 import { runMazeFunction } from "../utils/runMazeAlgorithm";
 import { useSpeed } from "../hooks/useSpeed";
@@ -19,7 +19,7 @@ export function Nav({
     const [isDisabled, setIsDisabled] = useState(false)
     const {maze, setMaze, grid, setGrid,isGraphVisualized, setIsGraphVisualized,algorithm, setAlgorithm} = usePathFinding();
     const {startTile, endTile} = useTile();
-    const {speed} = useSpeed();
+    const {speed, setSpeed} = useSpeed();
 
     const handleGenerateMaze = (maze: MazeType)=>{
         if(maze==='NONE'){
@@ -78,6 +78,14 @@ export function Nav({
                         onChange={(e)=>{
                             handleGenerateMaze(e.target.value as MazeType)
                         }}/>
+                        <Select
+                            label="speed"
+                            value={speed}
+                            options={SPEEDS}
+                            onChange={(e)=>{
+                                setSpeed(parseInt(e.target.value) as SpeedType)
+                            }}
+                        />
                         <Select
                             label='Graph'
                             value={algorithm}
