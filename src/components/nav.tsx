@@ -7,6 +7,8 @@ import { AlgorithmType, MazeType } from "../utils/type";
 import { Select } from "./select";
 import { runMazeFunction } from "../utils/runMazeAlgorithm";
 import { useSpeed } from "../hooks/useSpeed";
+import { runPathfindingAlgorithm } from "../utils/runPathfindingAlgorithm";
+import { PlayButton } from "./playButton";
 
 export function Nav(){
     const [isDisabled, setIsDisabled] = useState(false)
@@ -30,6 +32,24 @@ export function Nav(){
         setGrid(newGrid)
         setIsGraphVisualized(false)
     }
+
+    const handleRunVisualizer = ()=>{
+        if(isGraphVisualized){
+            setIsGraphVisualized(false);
+            resetGrid({grid : grid.slice(), startTile, endTile});
+            return
+        }
+
+        const {traversedTiles, path}=runPathfindingAlgorithm({
+            algorithm,
+            grid,
+            startTile,
+            endTile,
+        })
+
+        console.log('traversedTile', traversedTiles); 
+        console.log('path', path); 
+    }
     return(
         <div className="flex items-center justify-center min-h-[4.5rem] border-b shadow-gray-600 sm:px-5 px-0">
             <div className="flex items-center lg:justify-between justify-center w-full sm:w-[52rem]">
@@ -52,6 +72,9 @@ export function Nav(){
                                 setAlgorithm(e.target.value as AlgorithmType)
                             }}
                         />
+                        <PlayButton isDisabled={isDisabled}
+                        isGraphVisualized = {isGraphVisualized}
+                        handleRunVisualizer={handleRunVisualizer} />
                 </div>
             </div>
         </div>
