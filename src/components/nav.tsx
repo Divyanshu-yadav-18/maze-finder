@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { usePathFinding } from "../hooks/usePathFinding";
 import { useTile } from "../hooks/useTile";
-import { MAZES } from "../utils/constant";
+import { MAZES, PATHFINDING_ALGORITHMS } from "../utils/constant";
 import { resetGrid } from "../utils/resetGrid";
-import { MazeType } from "../utils/type";
+import { AlgorithmType, MazeType } from "../utils/type";
 import { Select } from "./select";
 import { runMazeFunction } from "../utils/runMazeAlgorithm";
 import { useSpeed } from "../hooks/useSpeed";
 
 export function Nav(){
     const [isDisabled, setIsDisabled] = useState(false)
-    const {maze, setMaze, grid, setGrid, setIsGraphVisualized} = usePathFinding();
+    const {maze, setMaze, grid, setGrid,isGraphVisualized, setIsGraphVisualized,algorithm, setAlgorithm} = usePathFinding();
     const {startTile, endTile} = useTile();
     const {speed} = useSpeed();
 
@@ -46,7 +46,11 @@ export function Nav(){
                         }}/>
                         <Select
                             label='Graph'
-                            value={}
+                            value={algorithm}
+                            options={PATHFINDING_ALGORITHMS}
+                            onChange={(e)=>{
+                                setAlgorithm(e.target.value as AlgorithmType)
+                            }}
                         />
                 </div>
             </div>
